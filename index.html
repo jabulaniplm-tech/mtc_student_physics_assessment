@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AI-Assisted Physics Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      padding: 20px;
+      color: #222;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      color: #123c69;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    .checkbox-group, .radio-group {
+      background: #eef3f8;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 6px;
+    }
+
+    .checkbox-group label, .radio-group label {
+      font-weight: normal;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 25px;
+      background: #123c69;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #0b2948;
+    }
+
+    .score-box {
+      margin-top: 20px;
+      background: #e7ffe7;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>AI-Assisted Physics Demonstration Assignment</h1>
+
+    <p>
+      Task: Use AI responsibly to plan and demonstrate that liquid pressure increases with depth.
+      You are being assessed not only on the experiment, but on how intelligently you use AI.
+    </p>
+
+    <form id="assignmentForm">
+
+      <label>Full Name</label>
+      <input type="text" id="name" required>
+
+      <label>Student ID</label>
+      <input type="text" id="studentId" required>
+
+      <label>Class / Programme</label>
+      <input type="text" id="className" required>
+
+      <label>Physics Topic</label>
+      <select id="topic" required>
+        <option value="">Select topic</option>
+        <option>Pressure in liquids</option>
+        <option>Density and floating</option>
+        <option>Forces</option>
+        <option>Energy</option>
+        <option>Other</option>
+      </select>
+
+      <label>Did you use AI?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="aiUsed" value="Yes" required> Yes</label>
+        <label><input type="radio" name="aiUsed" value="No"> No</label>
+      </div>
+
+      <label>Which AI tools did you use?</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="aiTool" value="ChatGPT"> ChatGPT</label>
+        <label><input type="checkbox" class="aiTool" value="Gemini"> Gemini</label>
+        <label><input type="checkbox" class="aiTool" value="DeepSeek"> DeepSeek</label>
+        <label><input type="checkbox" class="aiTool" value="Ollama / Local AI"> Ollama / Local AI</label>
+        <label><input type="checkbox" class="aiTool" value="Other"> Other</label>
+      </div>
+
+      <label>Paste one or more prompts you gave to AI</label>
+      <textarea id="prompts" required></textarea>
+
+      <label>How good were your prompts?</label>
+      <select id="promptQuality" required>
+        <option value="">Select</option>
+        <option value="1">1 - Very vague</option>
+        <option value="2">2 - Somewhat clear</option>
+        <option value="3">3 - Clear</option>
+        <option value="4">4 - Detailed</option>
+        <option value="5">5 - Excellent and improved through follow-up prompts</option>
+      </select>
+
+      <label>Did you check or verify the AI answer?</label>
+      <select id="verifiedAI" required>
+        <option value="">Select</option>
+        <option value="0">No verification</option>
+        <option value="1">I only trusted AI</option>
+        <option value="3">I checked with notes/textbook</option>
+        <option value="5">I checked, corrected, and improved the AI response</option>
+      </select>
+
+      <label>Sources used besides AI</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="source" value="Lecture notes"> Lecture notes</label>
+        <label><input type="checkbox" class="source" value="Textbook"> Textbook</label>
+        <label><input type="checkbox" class="source" value="Experiment observation"> Experiment observation</label>
+        <label><input type="checkbox" class="source" value="Peer discussion"> Peer discussion</label>
+        <label><input type="checkbox" class="source" value="None"> None</label>
+      </div>
+
+      <label>Describe your final experiment design</label>
+      <textarea id="experimentClarity" required></textarea>
+
+      <label>Which misconceptions did you address?</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" class="misconception" value="Pressure depends on volume"> Pressure depends on volume</label>
+        <label><input type="checkbox" class="misconception" value="Pressure depends on depth"> Pressure depends on depth</label>
+        <label><input type="checkbox" class="misconception" value="Heavy objects always sink"> Heavy objects always sink</label>
+        <label><input type="checkbox" class="misconception" value="Water comes out equally from all holes"> Water comes out equally from all holes</label>
+      </div>
+
+      <label>How would you teach this to learners?</label>
+      <textarea id="teachingPlan" required></textarea>
+
+      <label>Reflection: What did AI help you with, and where was AI limited?</label>
+      <textarea id="reflection" required></textarea>
+
+      <div class="score-box" id="scoreBox"></div>
+
+      <button type="submit">Submit Assignment</button>
+    </form>
+  </div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzuAmYk4nj27PF4GWLUAwauW3z-61SNVPB67wDqruTU3tIAzrDucfyVDkoRKiK8DEjfug/exec";
+
+    function getCheckedValues(className) {
+      return Array.from(document.querySelectorAll("." + className + ":checked"))
+        .map(item => item.value)
+        .join(", ");
+    }
+
+    function calculateScores() {
+      const promptQuality = Number(document.getElementById("promptQuality").value);
+      const verifiedAI = Number(document.getElementById("verifiedAI").value);
+      const prompts = document.getElementById("prompts").value.trim();
+      const experiment = document.getElementById("experimentClarity").value.trim();
+      const teaching = document.getElementById("teachingPlan").value.trim();
+      const reflection = document.getElementById("reflection").value.trim();
+
+      let aiScore = 0;
+
+      aiScore += promptQuality * 4;
+      aiScore += verifiedAI * 4;
+
+      if (prompts.length > 80) aiScore += 10;
+      if (reflection.length > 100) aiScore += 10;
+
+      if (aiScore > 60) aiScore = 60;
+
+      let totalScore = aiScore;
+
+      if (experiment.length > 120) totalScore += 15;
+      if (teaching.length > 120) totalScore += 15;
+      if (getCheckedValues("misconception").length > 0) totalScore += 10;
+
+      if (totalScore > 100) totalScore = 100;
+
+      return { aiScore, totalScore };
+    }
+
+    document.getElementById("assignmentForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const scores = calculateScores();
+
+      const data = {
+        name: document.getElementById("name").value,
+        studentId: document.getElementById("studentId").value,
+        className: document.getElementById("className").value,
+        topic: document.getElementById("topic").value,
+        aiUsed: document.querySelector('input[name="aiUsed"]:checked').value,
+        aiTools: getCheckedValues("aiTool"),
+        promptQuality: document.getElementById("promptQuality").value,
+        verifiedAI: document.getElementById("verifiedAI").value,
+        sourcesUsed: getCheckedValues("source"),
+        experimentClarity: document.getElementById("experimentClarity").value,
+        misconceptions: getCheckedValues("misconception"),
+        teachingPlan: document.getElementById("teachingPlan").value,
+        reflection: document.getElementById("reflection").value,
+        autoAIScore: scores.aiScore,
+        autoTotalScore: scores.totalScore
+      };
+
+      fetch(scriptURL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      document.getElementById("scoreBox").style.display = "block";
+      document.getElementById("scoreBox").innerHTML =
+        "Submitted successfully.<br>Automatic AI-use score: " +
+        scores.aiScore +
+        "/60<br>Estimated automatic total score: " +
+        scores.totalScore +
+        "/100";
+
+      document.getElementById("assignmentForm").reset();
+    });
+  </script>
+</body>
+</html>
